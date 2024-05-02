@@ -24,6 +24,9 @@ def play_game():
             if "Correct" in reply:
                 s.close()
                 return
-            
-
+while True:
+    play_game()
+    play_again = input("Do you want to play again? (Y/N): ").upper()
+    if play_again != "Y":
+        break
 
