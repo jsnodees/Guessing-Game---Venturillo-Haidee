@@ -1,10 +1,10 @@
-    import socket
+import socket
 
 
-    host = "localhost"
-    port = 7777
+host = "localhost"
+port = 7777
 
-    def play_game():
+def play_game():
         s = socket.socket()
         s.connect((host, port))
         
@@ -28,7 +28,7 @@
 
             while True:
                 #let get our input from the user
-                user_input = input("").strip()
+                user_input = input(reply).strip()
                 s.sendall(user_input.encode())
 
                 reply = s.recv(1024).decode().strip()
@@ -38,7 +38,7 @@
                 if "Correct" in reply:
                     s.close()
                     return
-    while True:
+while True:
         play_game()
         play_again = input("Do you want to play again? (Y/N): ").upper()
         if play_again != "Y":
