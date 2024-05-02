@@ -13,7 +13,7 @@ def play_game():
                                  "a. Easy (1 - 50) \n "
                                  "b. Medium (1 - 100) \n "
                                  "c. Hard (1 - 500) \n"
-                                 "Please enter your choice (a/b/c): ").strip().upper()
+                                 "Please enter your choice (a/b/c): ").strip().lower()
         if difficulty_level in ['a','b','c']:
             s.sendall(difficulty_level.encode())
             break
@@ -22,6 +22,8 @@ def play_game():
 
     while True:
         data = s.recv(1024)
+        if not data:
+            break
         print(data.decode().strip())
 
         while True:
