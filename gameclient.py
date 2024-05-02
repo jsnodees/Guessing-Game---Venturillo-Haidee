@@ -12,16 +12,18 @@ def play_game():
         data = s.recv(1024)
         print(data.decode().strip())
 
-    while True:
-        #let get our input from the user
-        user_input = input("").strip()
+        while True:
+            #let get our input from the user
+            user_input = input("").strip()
+            s.sendall(user_input.encode())
 
-        s.sendall(user_input.encode())
-        reply = s.recv(1024).decode().strip()
-        if "Correct" in reply:
+            reply = s.recv(1024).decode().strip()
             print(reply)
-            break
-        print(reply)
-        continue
-    s.close()
+
+
+            if "Correct" in reply:
+                s.close()
+                return
+            
+
 
