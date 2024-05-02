@@ -60,6 +60,6 @@ while True:
                 break
             elif guess > guessme:
                 conn.sendall(b"Please Guess Lower! \n Enter your guess: ")
-            elif guess > guessme:
+            elif guess < guessme:
                 conn.sendall(b"Please Guess Higher! \n Enter your guess: ")
             continue
