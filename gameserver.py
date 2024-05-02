@@ -40,12 +40,26 @@ while True:
         conn.sendall(banner.encode())
     else:
         client_input = conn.recv(1024).decode().strip().upper()
-        guess = generate_random_int(client_input)
-        if guess is None:
+        guessme = generate_random_int(client_input)
+        if guessme is None:
             conn.sendall(b"Invalid Choice! Please choose a valid difficulty level (a/b/c) ")
             continue
-        print(f"Selected difficulty: {client_input}, Number to guess: {guess}")
+        print(f"Selected difficulty: {client_input}, Number to guess: {guessme}")
         conn.sendall(b"Game is now started! \n Enter your guess ")
 
         conn.sendall(b"Guess Lower!\nenter guess: ")
-        continue
+
+        while True:
+            client_input = conn.recv(1024)
+            guess = int(client_input.decode().strip())
+            print(f"User guess attempt: {guessme}")
+            if guess == guessme:
+                conn.sendall(b"Your Answer is Correct! ")
+                conn.close()
+                conn = None
+                break
+            elif guess > guessme:
+                conn.sendall(b"Please Guess Lower! \n Enter your guess: ")
+            elif guess > guessme:
+                conn.sendall(b"Please Guess Higher! \n Enter your guess: ")
+            continue
