@@ -20,7 +20,7 @@ def play_game():
         else:
             print("Invallid Choice! Please choose a valid difficulty level (a/b/c): ")
 
-        
+    while True:
         data = s.recv(1024)
         print(data.decode().strip())
 
