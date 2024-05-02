@@ -4,11 +4,24 @@ import random
 host = "0.0.0.0"
 port = 7777
 banner = """
-== Guessing Game v1.0 ==
-Enter your guess:"""
 
-def generate_random_int(low, high):
-    return random.randint(low, high)
+== Guessing Game v1.0 ==
+Choose difficulty level:
+a. Easy (1-50)
+b. Medium (1-100)
+c. Hard (1-500)
+
+Enter your choice (a/b/c): """
+
+def generate_random_int(difficulty):
+    if difficulty == "a":
+        return random.randint(1, 50)
+    elif difficulty == "b":
+        return random.randint(1, 100)
+    elif difficulty == "c":
+        return random.randint(1, 500)
+    else:
+        return None
 
 # initialize the socket object
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
