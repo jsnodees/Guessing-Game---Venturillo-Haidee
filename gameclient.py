@@ -9,6 +9,18 @@ def play_game():
     s.connect((host, port))
     
     while True:
+        difficulty_level = input("Please choose a difficulty level: \n "
+                                 "a. Easy (1 - 50) \n "
+                                 "b. Medium (1 - 100) \n "
+                                 "c. Hard (1 - 500) \n"
+                                 "Please enter your choice (a/b/c): ").strip().upper()
+        if difficulty_level in ['a','b','c']:
+            s.sendall(difficulty_level.encode())
+            break
+        else:
+            print("Invallid Choice! Please choose a valid difficulty level (a/b/c): ")
+
+        
         data = s.recv(1024)
         print(data.decode().strip())
 
