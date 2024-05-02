@@ -41,9 +41,11 @@ while True:
     else:
         client_input = conn.recv(1024).decode().strip().lower()
         guessme = generate_random_int(client_input)
+
         if guessme is None:
             conn.sendall(b"Invalid Choice! Please choose a valid difficulty level (a/b/c) ")
             continue
+        
         print(f"Selected difficulty: {client_input}, Number to guess: {guessme}")
         conn.sendall(b"Game is now started! \n Enter your guess ")
 
@@ -51,8 +53,8 @@ while True:
 
         while True:
             client_input = conn.recv(1024).decode().strip().lower()
-            guess = generate_random_int(client_input)
-            print(f"User guess attempt: {guessme}")
+            guess = int(client_input)
+            print(f"User guess attempt: {guess}")
             if guess == guessme:
                 conn.sendall(b"Your Answer is Correct! ")
                 conn.close()
@@ -60,6 +62,7 @@ while True:
                 break
             elif guess > guessme:
                 conn.sendall(b"Please Guess Lower! \n Enter your guess: ")
+                continue
             elif guess < guessme:
                 conn.sendall(b"Please Guess Higher! \n Enter your guess: ")
-            continue
+                continue

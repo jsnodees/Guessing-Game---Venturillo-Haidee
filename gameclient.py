@@ -1,21 +1,13 @@
-import socket
+    import socket
 
 
-host = "localhost"
-port = 7777
+    host = "localhost"
+    port = 7777
 
-def play_game():
-    while True:
-        try:
-            s = socket.socket()
-            s.connect((host, port))
-        except ConnectionRefusedError:
-            print("Connection refused make sure the server is running.")
-            return
-        except OSError as e:
-            print(f"Error: {e}")
-            return
-    
+    def play_game():
+        s = socket.socket()
+        s.connect((host, port))
+        
         while True:
             difficulty_level = input("Please choose a difficulty level: \n "
                                     "a. Easy (1 - 50) \n "
@@ -32,7 +24,7 @@ def play_game():
             data = s.recv(1024)
             if not data:
                 break
-            reply = (data.decode().strip())
+            reply = data.decode().strip()
 
             while True:
                 #let get our input from the user
@@ -42,12 +34,13 @@ def play_game():
                 reply = s.recv(1024).decode().strip()
                 print(reply)
 
+
                 if "Correct" in reply:
                     s.close()
                     return
-        while True:
-            play_game()
-            play_again = input("Do you want to play again? (Y/N): ").upper()
-            if play_again != "Y":
-                break
+    while True:
+        play_game()
+        play_again = input("Do you want to play again? (Y/N): ").upper()
+        if play_again != "Y":
+            break
 
