@@ -13,7 +13,24 @@ c. Hard (1-500)
 
 Enter your choice (a/b/c): """
 
-def generate_random_int(difficulty):
+leaderboard_file = "leaderboard.txt"
+
+leaderboard = {}
+try:
+    with open(leaderboard_file, "r") as file:
+        for line in file:
+            try:
+                username, score, difficulty = line.strip().split(',')
+                leaderboard[username] = {'score': int(score), 'difficulty': difficulty}
+            except ValueError:
+                continue
+except FileNotFoundError:
+    pass
+
+def generate_random_int(low, high):
+    return random.randint(low, high)
+
+def generate_random_number(difficulty):
     if difficulty == "a":
         return random.randint(1, 50)
     elif difficulty == "b":
@@ -49,11 +66,9 @@ while True:
         print(f"Selected difficulty: {client_input}, Number to guess: {guessme}")
         conn.sendall(b"Game is now started! \n Enter your guess ")
 
-        conn.sendall(b"Guess Lower!\nenter guess: ")
-
         while True:
             client_input = conn.recv(1024).decode().strip().lower()
-            guess = int(client_input)
+            guess = str(client_input)
             print(f"User guess attempt: {guess}")
             if guess == guessme:
                 conn.sendall(b"Your Answer is Correct! ")
