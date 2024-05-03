@@ -32,15 +32,19 @@ def generate_random_int(low, high):
 
 def generate_random_number(difficulty):
     if difficulty == "a":
-        return random.randint(1, 50)
+        return generate_random_int(1, 50)
     elif difficulty == "b":
-        return random.randint(1, 100)
+        return generate_random_int(1, 100)
     elif difficulty == "c":
-        return random.randint(1, 500)
+        return generate_random_int(1, 500)
     else:
-        return None
+        return generate_random_int(1, 100)
+    
+def display_leaderboard():
+    print("\n== Leaderboard ==")
+    for username, info in sorted(leaderboard.items(), key=lambda x: x[1]['score']):
+        print(f"{username}: {info['score']} tries (Difficulty: {info['difficulty']})")
 
-# initialize the socket object
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((host, port))
 s.listen(5)
