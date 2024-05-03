@@ -8,19 +8,20 @@ If you already have a pyhton installed on your device, then you can now proceed 
 3. Open the downloaded file on the destination folder
 4. Open or Extract the file.
 
-After you opened or extracted it, you can now run the file on your preffered IDE. 
-if you plan to open them on one device, you can do so by clicking the "Run python file on dedicated termuinal"
-By choosing that, you can run both the game server and the client in one IDE.
+After you opened it, you can now run the file on your preffered IDE.
+If you want to use them both on a one device, you can do so.
 
+To do that, you can click the "Run python file in dedicated terminal"
+By choosing that, you can now use them both on only in the IDEs terminal.
 
-How To Play:
-1. Enter Your Name
-2. Choose a difficulty level (a,b,c)
-Basically, the difficulty level is on a(easy), b(medium), c(hard)
-3. You can now enter your guess, depending on the range of your chosen difficulty.
-4. Every input you gave is youre going to receive a feedback from the server.
-5. You can keep on guessing, it doesnt matter how many tries. You just have to keep on guessing to finally guess the correct number.
+How To Play
+1. You have to input your name
+2. Choose a difficulty level.
+   There are 3 levels a(easy), b (medium), c(hard)
+3. You can now enter you guess number.
+4. You can keep on guessing until you got the correct number.
+5. When you are done guessing, it will ask if you want to play again.
+   You can enter YES or No
 
-
-gameserver.py - contains the servers code
-gameclient.py - contains the clients code
+gameserver.py - servers code
+gameclient.py - clients code
