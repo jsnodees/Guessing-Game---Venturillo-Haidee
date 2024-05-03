@@ -81,6 +81,8 @@ while True:
             username = client_input
             conn.sendall(b"Invalid choice! Please choose again.")
             continue
+
+        username = client_input
         
         while True:
             client_input = conn.recv(1024).decode().strip()
@@ -89,7 +91,7 @@ while True:
             attempts += 1
             if guess == guessme:
                 update_leaderboard(username, attempts, difficulty)
-                answer = (f"Correct Answe! {username}")
+                answer = (f"Correct Answer! {username}")
                 conn.sendall(answer.encode())
                 conn.close()
                 print(f"User {username} guessed the number in {attempts} tries.")
