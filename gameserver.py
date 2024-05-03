@@ -51,6 +51,7 @@ s.listen(5)
 
 print(f"server is listening in port {port}")
 conn = None
+
 while True:
     if conn is None:
         print("waiting for connection..")
@@ -58,10 +59,21 @@ while True:
         print(f"new client: {addr[0]}")
         # cheat_str = f"==== number to guess is {guessme} \n" + banner 
         # conn.sendall(cheat_str.encode())
-        conn.sendall(banner.encode())
     else:
+        conn.sendall(banner.encode())
         client_input = conn.recv(1024).decode().strip().lower()
-        guessme = generate_random_int(client_input)
+        difficulty = None
+        if client_input in ['a', 'b', 'c']:
+            difficulty = client_input
+            guessme = generate_random_number(difficulty)
+            print(f"Difficulty level chosen: {guessme}")
+            print(f"Number to guess: {guessme}")
+            conn.sendall(b"Enter your guess: ")
+            attempts = 0
+        else:
+            username = client_input
+            conn.sendall(b"Invalid choice! Please choose again.")
+            break
 
         if guessme is None:
             conn.sendall(b"Invalid Choice! Please choose a valid difficulty level (a/b/c) ")
