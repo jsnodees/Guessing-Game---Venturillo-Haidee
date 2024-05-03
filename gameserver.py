@@ -40,6 +40,13 @@ def generate_random_number(difficulty):
     else:
         return generate_random_int(1, 100)
     
+def update_leaderboard(username, score, difficulty):
+    leaderboard[username] = {'score': score, 'difficulty': difficulty}
+    
+    with open(leaderboard_file, "w") as file:
+        for username, info in leaderboard.items():
+            file.write(f"{username}, {info['score']}, {info['difficulty']}\n")
+
 def display_leaderboard():
     print("\n== Leaderboard ==")
     for username, info in sorted(leaderboard.items(), key=lambda x: x[1]['score']):
